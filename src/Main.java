@@ -16,6 +16,7 @@ public class Main {
     public static void main(String[] args) {
 
         //preload login info for an admin, a student and a faculty to the login arraylist
+
         Login loginAdmin = new Login(1, "MC Admin", "admin@mc.edu", "adminpass");
         Login loginS1 = new Login(1, "Student 1", "s1@mc.edu", "s1pass");
         Login loginF1 = new Login(1, "Faculty 1", "f1@mc.edu", "f1pass");
@@ -25,6 +26,7 @@ public class Main {
         System.out.println("Welcome to Montgomery College System!\nWould you like to login? (Y/N)");
         String answerLogin = sc.next().toLowerCase();
         String answerRole;
+
         switch (answerLogin) {
             case "y":
                 System.out.println("Would you like to login as an (A)dmin, (F)aculty, or (S)tudent?");
@@ -49,15 +51,31 @@ public class Main {
             case "n":
                 break;
         }
-        System.out.println();
-        System.out.println("Options:");
+        System.out.println("Options:\n1 = Add Student\n2 = Add Faculty\n3 = Edit Student\n4 = Edit Faculty\n5 = Add Class\n6 = Edit Class\n7 = Enroll Student\n8 = Hire a Faculty\n9 = View All Information\nEnter \"q\" to quit");
+        int answerOption = sc.nextInt();
+        switch(answerOption){
+            case 1:
+                System.out.println("Please enter student name: ");
+                String inputSN = sc.next();
+                inputSN+=sc.nextLine();
+                student.setName(inputSN);
+                System.out.println("Please enter student email: ");
+                String inputSE = sc.next();
+                student.setEmail(inputSE);
+                System.out.println("Please enter student ID");
+                int inputSID = sc.nextInt();
+                student.setId(inputSID);
+                arrStudent.add(student);
+            case 2:
+
+
+        }
 
     }
 
 
     public static void loginCheck() {
         boolean IsValid = false;
-
         do {
             for (Login l : arrLogin) {
                 System.out.println("Please enter your email: ");
@@ -82,4 +100,10 @@ public class Main {
         }while (!IsValid);
 
     }
+
+
+
+
+
+
 }
