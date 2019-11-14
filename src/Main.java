@@ -73,13 +73,12 @@ public class Main {
                     Login login = l;
                     if (l.getPassword().equals(loginPassword)) {
                         IsValid = true;
-                        System.out.println(l.getName() + "has logged in!");
+                        System.out.println(l.getName() + " has logged in!");
                         break;
                     }else {
                         IsValid = false;
                     }
                 } else {
-                    IsValid = false;
                     System.out.println("You have entered the wrong email or password. Please try again!");
                 }
             }
