@@ -1,19 +1,23 @@
+import java.util.ArrayList;
+
 public class Enrollment {
     private int enrollmentID;
-    private int enrolledSID;
-    private int enrolledFID;
+    private ArrayList<Integer> enrolledSID;
+    private ArrayList<Integer> enrolledFID;
     private int enrolledCID;
-    private String enrolledDate;
+    private ArrayList<String> enrolledSDate;
+    private ArrayList<String> enrolledFDate;
 
     public Enrollment() {
     }
 
-    public Enrollment(int enrollmentID, int enrolledSID, int enrolledFID, int enrolledCID, String enrolledDate) {
+    public Enrollment(int enrollmentID, ArrayList<Integer> enrolledSID, ArrayList<Integer> enrolledFID, int enrolledCID, ArrayList<String> enrolledSDate, ArrayList<String> enrolledFDate) {
         this.enrollmentID = enrollmentID;
         this.enrolledSID = enrolledSID;
         this.enrolledFID = enrolledFID;
         this.enrolledCID = enrolledCID;
-        this.enrolledDate = enrolledDate;
+        this.enrolledSDate = enrolledSDate;
+        this.enrolledFDate = enrolledFDate;
     }
 
     public int getEnrollmentID() {
@@ -24,19 +28,19 @@ public class Enrollment {
         this.enrollmentID = enrollmentID;
     }
 
-    public int getEnrolledSID() {
+    public ArrayList<Integer> getEnrolledSID() {
         return enrolledSID;
     }
 
-    public void setEnrolledSID(int enrolledSID) {
+    public void setEnrolledSID(ArrayList<Integer> enrolledSID) {
         this.enrolledSID = enrolledSID;
     }
 
-    public int getEnrolledFID() {
+    public ArrayList<Integer> getEnrolledFID() {
         return enrolledFID;
     }
 
-    public void setEnrolledFID(int enrolledFID) {
+    public void setEnrolledFID(ArrayList<Integer> enrolledFID) {
         this.enrolledFID = enrolledFID;
     }
 
@@ -48,11 +52,19 @@ public class Enrollment {
         this.enrolledCID = enrolledCID;
     }
 
-    public String getEnrolledDate() {
-        return enrolledDate;
+    public ArrayList<String> getEnrolledSDate() {
+        return enrolledSDate;
     }
 
-    public void setEnrolledDate(String enrolledDate) {
-        this.enrolledDate = enrolledDate;
+    public void setEnrolledSDate(ArrayList<String> enrolledSDate) {
+        this.enrolledSDate = enrolledSDate;
+    }
+
+    public ArrayList<String> getEnrolledFDate() {
+        return enrolledFDate;
+    }
+
+    public void setEnrolledFDate(ArrayList<String> enrolledFDate) {
+        this.enrolledFDate = enrolledFDate;
     }
 }

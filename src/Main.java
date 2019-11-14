@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -8,7 +9,10 @@ public class Main {
     public static ArrayList<Faculty> arrFaculty = new ArrayList<>();
     public static ArrayList<Class> arrCourse= new ArrayList<>();
     public static ArrayList<Enrollment> arrEnrollment= new ArrayList<>();
-
+    public static ArrayList<Integer> arrFacultyEnrollment = new ArrayList<>();
+    public static ArrayList<Integer> arrStudentEnrollment = new ArrayList<>();
+    public static ArrayList<String> arrSEnrollmentDate= new ArrayList<>();
+    public static ArrayList<String> arrFEnrollmentDate= new ArrayList<>();
 
     //create instance for Student, Admin and Faculty class
     public static Student student = new Student();
@@ -20,13 +24,26 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //preload login info for an admin, a student and a faculty to the login arraylist
-        Admin loginAdmin = new Admin(1, "MC Admin", "admin@mc.edu", "adminpass");
-        Student loginS1 = new Student(1, "Student 1", "s1@mc.edu", "s1pass");
-        arrStudent.add(loginS1);
-        Faculty loginF1 = new Faculty(1, "Faculty 1", "f1@mc.edu", "f1pass");
-        arrFaculty.add(loginF1);
-        Collections.addAll(arrLogin, loginAdmin, loginS1, loginF1);
+        //preload info for an admin, a student and a faculty to the login arraylist
+        Admin admin1 = new Admin(1, "MC Admin", "admin@mc.edu", "adminpass");
+        Student s1 = new Student(1, "Student 1", "s1@mc.edu", "s1pass");
+        Student s2 = new Student(2, "Student 2", "s2@mc.edu", "s2pass");
+        Collections.addAll(arrStudent,s1,s2);
+        Faculty f1 = new Faculty(1, "Faculty 1", "f1@mc.edu", "f1pass");
+        Faculty f2 = new Faculty(2, "Faculty 2", "f2@mc.edu", "f2pass");
+        Collections.addAll(arrFaculty,f1,f2);
+
+        //adding 3 classes of info to the abstract class
+        Collections.addAll(arrLogin, admin1, s1, f1, s2, f1);
+
+        //preload info for a course and an enrollment
+        Class course1 = new Class(1,"Java1","Welcome to Java!");
+        arrStudentEnrollment.add(1);
+        arrFacultyEnrollment.add(1);
+        arrSEnrollmentDate.add("3/31/19");
+        arrFEnrollmentDate.add("4/30/19");
+        Enrollment e1 = new Enrollment(1, arrStudentEnrollment,arrFacultyEnrollment,1,arrSEnrollmentDate,arrFEnrollmentDate);
+        arrEnrollment.add(e1);
 
         //Welcome message
         System.out.println("Welcome to Montgomery College System!\nWould you like to login? (Y/N)");
@@ -91,6 +108,7 @@ public class Main {
             System.out.println("Options:\n1 = Add Student\n2 = Add Faculty\n3 = Edit Student\n4 = Edit Faculty\n5 = Add Class\n6 = Edit Class\n7 = Enroll Student\n8 = Hire a Faculty\n9 = View All Information\nEnter \"q\" to quit");
             int answerOption = sc.nextInt();
             switch (answerOption) {
+                //add student
                 case 1:
                     System.out.println("Please enter student name: ");
                     String inputSN = sc.next();
@@ -104,6 +122,7 @@ public class Main {
                     student.setId(inputSID);
                     arrStudent.add(student);
                     break;
+                //add faculty
                 case 2:
                     System.out.println("Please enter faculty name: ");
                     String inputFN = sc.next();
@@ -117,6 +136,7 @@ public class Main {
                     faculty.setId(inputFID);
                     arrFaculty.add(faculty);
                     break;
+                //edit student
                 case 3:
                     System.out.println("Please enter the ID of the student you would like to edit: ");
                     int editSID = sc.nextInt();
@@ -129,6 +149,7 @@ public class Main {
                         }
                     }
                     break;
+                //edit faculty
                 case 4:
                     System.out.println("Please enter the ID of the faculty you would like to edit: ");
                     int editFID = sc.nextInt();
@@ -141,6 +162,7 @@ public class Main {
                         }
                     }
                     break;
+                //add class
                 case 5:
                     System.out.println("Please enter the new course title: ");
                     String inputCTitle = sc.next();
@@ -155,6 +177,7 @@ public class Main {
                     course.setDescription(inputCDescription);
                     arrCourse.add(course);
                     break;
+                //edit class
                 case 6:
                     System.out.println("Please enter the ID of the course you would like to edit: ");
                     int editCID = sc.nextInt();
@@ -167,34 +190,42 @@ public class Main {
                         }
                     }
                     break;
+                //Enroll student
                 case 7:
-                    System.out.println("Please enter the Course ID: ");
-                    int enrollmentCSID = sc.nextInt();
-                    System.out.println("Please enter the Student ID: ");
-                    int enrollmentSID = sc.nextInt();
-                    System.out.println("Please enter the enrollment date: ");
-                    String enrollmentDate = sc.next();
+                    System.out.println("Please select the enrollment ID for which you would like to add the student: ");
+                    int sEID = sc.nextInt();
                     for (Enrollment e : arrEnrollment) {
-                        if (e.getEnrolledCID() == enrollmentCSID) {
-                            e.setEnrolledSID(enrollmentSID);
-                            e.setEnrolledDate(enrollmentDate);
+                        if (e.getEnrollmentID() == sEID) {
+                            System.out.println("Please enter the new Student ID: ");
+                            int enrollmentSID = sc.nextInt();
+                            arrStudentEnrollment.add(enrollmentSID);
+                            System.out.println("Please enter the enrollment date: ");
+                            String enrollmentSDate = sc.next();
+                            arrSEnrollmentDate.add(enrollmentSDate);
+                        } else {
+                            System.out.println("Invalid enrollment ID, please go back.");
                         }
                     }
                     break;
+
+                //Enroll faculty
                 case 8:
-                    System.out.println("Please enter the Course ID: ");
-                    int enrollmentCFID = sc.nextInt();
-                    System.out.println("Please enter the Faculty ID: ");
-                    int enrollmentFID = sc.nextInt();
-                    System.out.println("Please enter the enrollment date: ");
-                    String enrollmentDateF = sc.next();
-                    for (Enrollment e : arrEnrollment) {
-                        if (e.getEnrolledCID() == enrollmentCFID) {
-                            e.setEnrolledFID(enrollmentFID);
-                            e.setEnrolledDate(enrollmentDateF);
+                    System.out.println("Please select the enrollment ID for which you would like to add the faculty member: ");
+                    int fEID = sc.nextInt();
+                    for (Enrollment e: arrEnrollment){
+                        if (e.getEnrollmentID()==fEID){
+                            System.out.println("Please enter the new Faculty ID: ");
+                            int enrollmentFID = sc.nextInt();
+                            arrFacultyEnrollment.add(enrollmentFID);
+                            System.out.println("Please enter the enrollment date: ");
+                            String enrollmentFDate = sc.next();
+                            arrFEnrollmentDate.add(enrollmentFDate);
+                        }else{
+                            System.out.println("Invalid enrollment ID, please go back.");
                         }
                     }
                     break;
+                //Print
                 case 9:
                     System.out.println("All Students:\n");
                     for (Student s : arrStudent) {
