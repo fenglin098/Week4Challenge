@@ -21,9 +21,11 @@ public class Main {
     public static void main(String[] args) {
 
         //preload login info for an admin, a student and a faculty to the login arraylist
-        Login loginAdmin = new Login(1, "MC Admin", "admin@mc.edu", "adminpass");
-        Login loginS1 = new Login(1, "Student 1", "s1@mc.edu", "s1pass");
-        Login loginF1 = new Login(1, "Faculty 1", "f1@mc.edu", "f1pass");
+        Admin loginAdmin = new Admin(1, "MC Admin", "admin@mc.edu", "adminpass");
+        Student loginS1 = new Student(1, "Student 1", "s1@mc.edu", "s1pass");
+        arrStudent.add(loginS1);
+        Faculty loginF1 = new Faculty(1, "Faculty 1", "f1@mc.edu", "f1pass");
+        arrFaculty.add(loginF1);
         Collections.addAll(arrLogin, loginAdmin, loginS1, loginF1);
 
         //Welcome message
@@ -39,6 +41,7 @@ public class Main {
                     case "a":
                         admin.welcomeMsg();
                         loginCheck();
+                        adminRights();
                         break;
                     case "f":
                         faculty.welcomeMsg();
@@ -53,8 +56,37 @@ public class Main {
                 }
                 break;
             case "n":
+                System.out.println("Goodbye!");
                 break;
         }
+    }
+
+    public static void loginCheck() {
+        boolean IsValid = false;
+        do {
+            for (Login l : arrLogin) {
+                System.out.println("Please enter your email: ");
+                String loginEmail = sc.next();
+                System.out.println("Please enter your password: ");
+                String loginPassword = sc.next();
+                if (l.getEmail().equals(loginEmail)) {
+                    Login login = l;
+                    if (l.getPassword().equals(loginPassword)) {
+                        IsValid = true;
+                        System.out.println(l.getName() + "has logged in!");
+                        break;
+                    }else {
+                        IsValid = false;
+                    }
+                } else {
+                    IsValid = false;
+                    System.out.println("You have entered the wrong email or password. Please try again!");
+                }
+            }
+        }while (!IsValid);
+
+    }
+    public static void adminRights (){
         String answerOption2;
         do {
             System.out.println("Options:\n1 = Add Student\n2 = Add Faculty\n3 = Edit Student\n4 = Edit Faculty\n5 = Add Class\n6 = Edit Class\n7 = Enroll Student\n8 = Hire a Faculty\n9 = View All Information\nEnter \"q\" to quit");
@@ -194,36 +226,4 @@ public class Main {
             answerOption2 = sc.next().toLowerCase();
         } while (answerOption2.equalsIgnoreCase("y"));
     }
-
-    public static void loginCheck() {
-        boolean IsValid = false;
-        do {
-            for (Login l : arrLogin) {
-                System.out.println("Please enter your email: ");
-                String loginEmail = sc.next();
-                System.out.println("Please enter your password: ");
-                String loginPassword = sc.next();
-                if (l.getEmail().equals(loginEmail)) {
-                    Login login = l;
-                    if (l.getPassword().equals(loginPassword)) {
-                        IsValid = true;
-                        System.out.println(l.getName() + "has logged in!");
-                        break;
-                    }else {
-                        IsValid = false;
-                    }
-                } else {
-                    IsValid = false;
-                    System.out.println("You have entered the wrong email or password. Please try again!");
-                }
-            }
-        }while (!IsValid);
-
-    }
-
-
-
-
-
-
 }
