@@ -1,7 +1,6 @@
 public class Student extends Login{
     @Override
-    public String welcomeMsg(){
-        String x = "Welcome Student";
-        return x;
+    public void welcomeMsg(){
+        System.out.println("Welcome Student");
     }
 }

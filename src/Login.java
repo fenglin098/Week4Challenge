@@ -46,9 +46,12 @@ public class Login {
         this.password = password;
     }
 
-    public String welcomeMsg(){
-        String x = "Welcome ";
-        return x;
+    public void welcomeMsg(){
+        System.out.println("Welcome");
+    }
+
+    public void check(String e, String p){
+
     }
 
 
