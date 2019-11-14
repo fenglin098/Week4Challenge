@@ -56,8 +56,8 @@ public class Main {
 
 
     public static void loginCheck() {
-        boolean emailIsValid = false;
-        boolean pwIsValid = false;
+        boolean IsValid = false;
+
         do {
             for (Login l : arrLogin) {
                 System.out.println("Please enter your email: ");
@@ -65,21 +65,21 @@ public class Main {
                 System.out.println("Please enter your password: ");
                 String loginPassword = sc.next();
                 if (l.getEmail().equals(loginEmail)) {
-                    emailIsValid = true;
+
                     Login login = l;
                     if (l.getPassword().equals(loginPassword)) {
-                        pwIsValid = true;
+                        IsValid = true;
                         System.out.println(l.getName() + "has logged in!");
                         break;
                     }else {
-                        pwIsValid = false;
+                        IsValid = false;
                     }
                 } else {
-                    emailIsValid = false;
+                    IsValid = false;
                     System.out.println("You have entered the wrong email or password. Please try again!");
                 }
             }
-        }while (!pwIsValid || !emailIsValid);
+        }while (!IsValid);
 
     }
 }
