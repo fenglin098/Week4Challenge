@@ -80,24 +80,29 @@ public class Main {
 
     public static void loginCheck() {
         boolean IsValid = false;
+
         do {
+            System.out.println("Please enter your email: ");
+            String loginEmail = sc.next();
+            System.out.println("Please enter your password: ");
+            String loginPassword = sc.next();
+            Login login = null;
             for (Login l : arrLogin) {
-                System.out.println("Please enter your email: ");
-                String loginEmail = sc.next();
-                System.out.println("Please enter your password: ");
-                String loginPassword = sc.next();
                 if (l.getEmail().equals(loginEmail)) {
-                    Login login = l;
+                    //login = l;
                     if (l.getPassword().equals(loginPassword)) {
                         IsValid = true;
-                        System.out.println(l.getName() + " has logged in!");
+                        login = l;
                         break;
-                    }else {
-                        IsValid = false;
                     }
-                } else {
-                    System.out.println("You have entered the wrong email or password. Please try again!");
+
                 }
+            }
+            if (IsValid) {
+                System.out.println(login.getName() + " has logged in!");
+                return;
+            } else {
+                System.out.println("You have entered the wrong email or password. Please try again!");
             }
         }while (!IsValid);
 
@@ -251,6 +256,7 @@ public class Main {
                     break;
                 default:
                     System.out.println("Goodbye");
+                    break;
             }
             System.out.println("Would you like to select another option? (Y/N)");
             answerOption2 = sc.next().toLowerCase();
